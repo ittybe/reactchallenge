@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/reactchallenge/static/css/main.ea1455b2.chunk.css",
+    "main.js": "/reactchallenge/static/js/main.3e717287.chunk.js",
+    "main.js.map": "/reactchallenge/static/js/main.3e717287.chunk.js.map",
+    "runtime-main.js": "/reactchallenge/static/js/runtime-main.ee99bb35.js",
+    "runtime-main.js.map": "/reactchallenge/static/js/runtime-main.ee99bb35.js.map",
+    "static/js/2.d77e0594.chunk.js": "/reactchallenge/static/js/2.d77e0594.chunk.js",
+    "static/js/2.d77e0594.chunk.js.map": "/reactchallenge/static/js/2.d77e0594.chunk.js.map",
+    "index.html": "/reactchallenge/index.html",
+    "static/css/main.ea1455b2.chunk.css.map": "/reactchallenge/static/css/main.ea1455b2.chunk.css.map",
+    "static/js/2.d77e0594.chunk.js.LICENSE.txt": "/reactchallenge/static/js/2.d77e0594.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ee99bb35.js",
+    "static/js/2.d77e0594.chunk.js",
+    "static/css/main.ea1455b2.chunk.css",
+    "static/js/main.3e717287.chunk.js"
+  ]
+}
