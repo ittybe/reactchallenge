@@ -3,6 +3,7 @@ import './App.css';
 import AlphabetPicker from './AlphabetPicker';
 import EmployeeComponent from './EmployeeComponent';
 import LetterSection from "./LetterSection";
+import DobMonth from "./DobMonth";
 
 import addClassToString from "./utils/addClassToString";
 import removeClassFromString from "./utils/removeClassFromString";
@@ -19,20 +20,51 @@ export class App extends react.Component {
     this.state = {
       employees: [],
       activeEmployees: [],
-      searchQuery: []
+      searchQuery: [],
+      birthdates: []
     }
     this.pickerElWrapper = createRef();
-
+    this.sessionStorageKey = "allData";
     // methods bindings
     this.searchForEmployees = this.searchForEmployees.bind(this);
     this.handleIsActiveChange = this.handleIsActiveChange.bind(this);
     this.getEmployeesBirthdates = this.getEmployeesBirthdates.bind(this);
+    this.displayEmployeeBirthdates = this.displayEmployeeBirthdates.bind(this);
+
+    
   }
+
+  componentDidUpdate() {
+    // save session storage after every update
+    const sessionStorage = window.sessionStorage;
+
+    // save 
+    let jsonToSave = {
+      activeEmployees: this.state.activeEmployees,
+      searchQuery: this.state.searchQuery,
+      birthdates: this.state.birthdates
+    }
+    console.log(`json to save ${jsonToSave}`)
+    sessionStorage.setItem(this.sessionStorageKey, JSON.stringify(jsonToSave))
+  }
+
   componentDidMount() {
     getAllEmployees().then(allEmployees => {
       this.setState({ employees: allEmployees })
       console.log("employees parsed")
     })
+    // session storage load 
+    const sessionStorage = window.sessionStorage;
+    if (sessionStorage.getItem(this.sessionStorageKey) !== null) {
+      let data = sessionStorage.getItem(this.sessionStorageKey);
+      console.log(`data after reload: ${data}`)
+      data = JSON.parse(data);
+      this.setState({
+        activeEmployees: data.activeEmployees,
+        searchQuery : data.searchQuery,
+        birthdates : data.birthdates  
+      })
+    }
   }
 
   searchForEmployees(query) {
@@ -56,7 +88,7 @@ export class App extends react.Component {
 
   getEmployeesBirthdates() {
     // new Array(12).fill([]) do not create new instances of array, so if you add to one it will be added to all arrays
-    const birthdates = [[],[],[],[],[],[],[],[],[],[],[],[]]
+    const birthdates = [[], [], [], [], [], [], [], [], [], [], [], []]
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     const activeEmployees = this.state.activeEmployees;
     const employees = this.state.employees;
@@ -64,11 +96,13 @@ export class App extends react.Component {
       // get month of emp dob
       const empId = activeEmployees[i];
       const empArr = employees.filter((emp) => emp.id === empId);
-      if (empArr.length > 0){
+      if (empArr.length > 0) {
         const employee = JSON.parse(JSON.stringify(empArr[0]));
         const date = new Date(employee.dob);
         const monthIndex = date.getMonth();
-        
+        // convert employee dob into string
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        console.log(date.toLocaleDateString("en-US", options))
         // add accordinly to the month array
         birthdates[monthIndex].push(employee);
       }
@@ -83,7 +117,29 @@ export class App extends react.Component {
       })
     }
     console.log(`birthdates ${birthdates}`);
-    return birthdates;
+
+    // format data
+    // get current month index
+    let today = new Date();
+    let todayMonthIndex = today.getMonth();
+
+    // for loop with i that index
+    let resultBirthdates = [];
+    let index = birthdates.length;
+    for (let i = todayMonthIndex; index > 0; index--) {
+      const month = birthdates[i];
+      resultBirthdates.push({
+        "monthName": months[i],
+        "employees": month
+      })
+      // increment i or set it to zero
+      i + 1 < birthdates.length ? i++ : i = 0
+    }
+    return resultBirthdates;
+  }
+
+  displayEmployeeBirthdates() {
+    this.setState({ birthdates: this.getEmployeesBirthdates() })
   }
 
   render() {
@@ -101,19 +157,28 @@ export class App extends react.Component {
 
     return (
       <div className="App">
-        <div ref={this.pickerElWrapper}>
-          <AlphabetPicker searchForEmployees={this.searchForEmployees}></AlphabetPicker>
-          <button onClick={this.getEmployeesBirthdates}>check birthdates</button>
+        <div>
+          <div ref={this.pickerElWrapper}>
+            <AlphabetPicker searchForEmployees={this.searchForEmployees}></AlphabetPicker>
+            <button onClick={this.displayEmployeeBirthdates}>check birthdates</button>
+          </div>
+          <div>
+            {
+              this.state.searchQuery.map((letter, i) => {
+                return <LetterSection
+                  letter={letter}
+                  key={i}
+                  employees={getEmployeesStartWithLetter(letter)}
+                  activeEmployees={this.state.activeEmployees}
+                  handleIsActiveChange={this.handleIsActiveChange} />
+              })
+            }
+          </div>
         </div>
         <div>
           {
-            this.state.searchQuery.map((letter, i) => {
-              return <LetterSection
-                letter={letter}
-                key={i}
-                employees={getEmployeesStartWithLetter(letter)}
-                activeEmployees={this.state.activeEmployees}
-                handleIsActiveChange={this.handleIsActiveChange} />
+            this.state.birthdates.map((month, i) => {
+              return <DobMonth key={i} monthName={month.monthName} employees={month.employees} />
             })
           }
         </div>

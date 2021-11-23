@@ -10,7 +10,6 @@ export function AlphabetPicker(props) {
     const [pickedLetters, setPickedLetters] = useState("");
 
     const letterRefs = useRef(new Array());
-
     // fucntions
     const handleLetterClick = (letter, i) => {
         // get ref
