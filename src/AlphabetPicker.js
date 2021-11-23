@@ -13,11 +13,6 @@ export function AlphabetPicker(props) {
 
     // fucntions
     const handleLetterClick = (letter, i) => {
-        // set state
-        let pickedLettersLocal = pickedLetters;
-        pickedLettersLocal += letter;
-        setPickedLetters(pickedLettersLocal)
-
         // get ref
         const letterRef = letterRefs.current[i]
         let classNameStr = letterRef.className
@@ -28,11 +23,23 @@ export function AlphabetPicker(props) {
             // if exists remove it  
             classNameStr = removeClassFromString(classNameStr, activeClassName);
             letterRef.className = classNameStr;
+            // and remove it from picked letters
+            let pickedLettersLocal = pickedLetters;
+            pickedLettersLocal = pickedLettersLocal.replace(letter, '')
+            pickedLettersLocal = onlyUnique(pickedLettersLocal.split("")).join("")
+            console.log(pickedLettersLocal)
+            setPickedLetters(pickedLettersLocal)
         }
         else {
             // if not exists add it 
             classNameStr = addClassToString(classNameStr, activeClassName);
             letterRef.className = classNameStr;
+            // and add it to pickedLetters
+            let pickedLettersLocal = pickedLetters;
+            pickedLettersLocal += letter;
+            pickedLettersLocal = onlyUnique(pickedLettersLocal.split("")).join("")
+            console.log(pickedLettersLocal)
+            setPickedLetters(pickedLettersLocal)
         }
     }
 
@@ -46,7 +53,7 @@ export function AlphabetPicker(props) {
                 }
             </div>
             <div>
-                <button></button>
+                <button onClick={() => props.searchForEmployees(pickedLetters)}>Search!</button>
             </div>
         </div>
     )
