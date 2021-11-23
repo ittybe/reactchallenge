@@ -26,6 +26,7 @@ export class App extends react.Component {
     // methods bindings
     this.searchForEmployees = this.searchForEmployees.bind(this);
     this.handleIsActiveChange = this.handleIsActiveChange.bind(this);
+    this.getEmployeesBirthdates = this.getEmployeesBirthdates.bind(this);
   }
   componentDidMount() {
     getAllEmployees().then(allEmployees => {
@@ -42,7 +43,7 @@ export class App extends react.Component {
 
   handleIsActiveChange(id, isActive) {
     let activeEmployees = [...this.state.activeEmployees];
-    if (isActive) { 
+    if (isActive) {
       activeEmployees.push(id)
     }
     else {
@@ -50,7 +51,39 @@ export class App extends react.Component {
       activeEmployees.splice(removeid, 1)
     }
     console.log(`active employees ${activeEmployees}`)
-    this.setState({activeEmployees: activeEmployees});
+    this.setState({ activeEmployees: activeEmployees });
+  }
+
+  getEmployeesBirthdates() {
+    // new Array(12).fill([]) do not create new instances of array, so if you add to one it will be added to all arrays
+    const birthdates = [[],[],[],[],[],[],[],[],[],[],[],[]]
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    const activeEmployees = this.state.activeEmployees;
+    const employees = this.state.employees;
+    for (let i = 0; i < activeEmployees.length; i++) {
+      // get month of emp dob
+      const empId = activeEmployees[i];
+      const empArr = employees.filter((emp) => emp.id === empId);
+      if (empArr.length > 0){
+        const employee = JSON.parse(JSON.stringify(empArr[0]));
+        const date = new Date(employee.dob);
+        const monthIndex = date.getMonth();
+        
+        // add accordinly to the month array
+        birthdates[monthIndex].push(employee);
+      }
+    }
+    // sort all months
+    for (let i = 0; i < birthdates.length; i++) {
+      const month = birthdates[i];
+      birthdates[i] = month.sort(function (a, b) {
+        var textA = a.lastName.toUpperCase();
+        var textB = b.lastName.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      })
+    }
+    console.log(`birthdates ${birthdates}`);
+    return birthdates;
   }
 
   render() {
@@ -70,6 +103,7 @@ export class App extends react.Component {
       <div className="App">
         <div ref={this.pickerElWrapper}>
           <AlphabetPicker searchForEmployees={this.searchForEmployees}></AlphabetPicker>
+          <button onClick={this.getEmployeesBirthdates}>check birthdates</button>
         </div>
         <div>
           {
