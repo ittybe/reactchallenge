@@ -18,7 +18,7 @@ export class App extends react.Component {
     super(props)
     this.state = {
       employees: [],
-      activeEmployees: {},
+      activeEmployees: [],
       searchQuery: []
     }
     this.pickerElWrapper = createRef();
@@ -41,9 +41,15 @@ export class App extends react.Component {
   }
 
   handleIsActiveChange(id, isActive) {
-    let activeEmployees = JSON.parse(JSON.stringify(this.state.activeEmployees));
-    activeEmployees[id] = isActive;
-    console.log(`active employees ${JSON.stringify(activeEmployees)}`)
+    let activeEmployees = [...this.state.activeEmployees];
+    if (isActive) { 
+      activeEmployees.push(id)
+    }
+    else {
+      let removeid = activeEmployees.indexOf(id)
+      activeEmployees.splice(removeid, 1)
+    }
+    console.log(`active employees ${activeEmployees}`)
     this.setState({activeEmployees: activeEmployees});
   }
 
