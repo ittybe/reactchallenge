@@ -8,7 +8,7 @@ export function LetterSection(props) {
     // activeEmployees
     const getEmployeesToDisplay = () => {
         let employees = props.employees.map((employee, i) => {
-            const isActive =  employee.id in props.activeEmployees ? true : false;
+            const isActive = props.activeEmployees.indexOf(employee.id) !== -1 ? true : false;
             return (<EmployeeComponent 
                 key={employee.id} 
                 id={employee.id} 
