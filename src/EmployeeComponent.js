@@ -1,9 +1,11 @@
 import { useState } from "react";
 
 export function EmployeeComponent(props) {
-    const [firstName, setFirstName] = useState(props.firstName);
-    const [lastName, setLastName] = useState(props.lastName);
-    const [id, setId] = useState(props.id);
+    // props
+    // id
+    // firstName
+    // lastName
+    
     const [isActive, setIsActive] = useState(props.isActive)
 
 
@@ -11,15 +13,17 @@ export function EmployeeComponent(props) {
         let value = event.target.value;
         setIsActive(value === "active");
         console.log(`value onIsActiveChange: ${value}`)
-        // props.handleIsActiveChange(event);
+        if (props.handleIsActiveChange) {
+            props.handleIsActiveChange(event);
+        }
     }
 
     return (
         <div>
-            <div>{firstName} {lastName}</div>
+            <div>{props.firstName} {props.lastName}</div>
             <div onChange={onIsActiveChange}>
-                <input type="radio" value="notactive" name="IsActive" /> Not Active
-                <input type="radio" value="active" name="IsActive" /> Active
+                <input defaultChecked={isActive === false} type="radio" value="notactive" name="IsActive" /> Not Active
+                <input defaultChecked={isActive === true} type="radio" value="active" name="IsActive" /> Active
             </div>
         </div>
     )

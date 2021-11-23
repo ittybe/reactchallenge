@@ -2,6 +2,7 @@ import './App.css';
 
 import AlphabetPicker from './AlphabetPicker';
 import EmployeeComponent from './EmployeeComponent';
+import LetterSection from "./LetterSection";
 
 import addClassToString from "./utils/addClassToString";
 import removeClassFromString from "./utils/removeClassFromString";
@@ -11,7 +12,9 @@ import { useRef, useState } from 'react';
 function App() {
   const [employees, setEmployees] = useState([])
 
-  const pickerElWrapper = useRef(null)
+  const pickerElWrapper = useRef(null);
+
+
   const searchForEmployees = (query) => {
     console.log(`search query: ${query}`)
     pickerElWrapper.current.className = addClassToString(pickerElWrapper.current.className, "hidden");
@@ -26,7 +29,8 @@ function App() {
         <AlphabetPicker searchForEmployees={searchForEmployees}></AlphabetPicker>
       </div>
       <div>
-        <EmployeeComponent firstName="some" lastName="somela" id="theid" isActive={false}/>
+        <LetterSection />
+        <EmployeeComponent firstName="some" lastName="somela" id="theid" isActive={true}/>
       </div>
     </div>
   );
