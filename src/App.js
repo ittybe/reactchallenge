@@ -9,18 +9,27 @@ import removeClassFromString from "./utils/removeClassFromString";
 
 import { useRef, useState } from 'react';
 
+import getAllEmployees from "./data";
+
+import axios from 'axios';
+
 function App() {
   const [employees, setEmployees] = useState([])
-
+  const [activeEmployees, setActiveEmployees] = useState({})
+  
+  async function initEmployees() {
+    const allEmployees = await getAllEmployees();
+    setEmployees(allEmployees);
+  }
+  initEmployees();
+  
   const pickerElWrapper = useRef(null);
-
 
   const searchForEmployees = (query) => {
     console.log(`search query: ${query}`)
     pickerElWrapper.current.className = addClassToString(pickerElWrapper.current.className, "hidden");
-    
+
     let q = query.split("");
-    
   }
 
   return (
@@ -29,8 +38,7 @@ function App() {
         <AlphabetPicker searchForEmployees={searchForEmployees}></AlphabetPicker>
       </div>
       <div>
-        <LetterSection />
-        <EmployeeComponent firstName="some" lastName="somela" id="theid" isActive={true}/>
+        <LetterSection letter={"a"} employees={employees} activeEmployees={activeEmployees}/>
       </div>
     </div>
   );
