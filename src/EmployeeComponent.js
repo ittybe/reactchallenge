@@ -13,9 +13,7 @@ export function EmployeeComponent(props) {
         let value = event.target.value;
         setIsActive(value === "active");
         console.log(`value onIsActiveChange: ${value}`)
-        if (props.handleIsActiveChange) {
-            props.handleIsActiveChange(event);
-        }
+        props.handleIsActiveChange(props.id, value === "active");
     }
 
     return (

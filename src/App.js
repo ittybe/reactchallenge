@@ -17,7 +17,7 @@ export class App extends react.Component {
   constructor(props) {
     super(props)
     this.state = {
-      employees : [],
+      employees: [],
       activeEmployees: {},
       searchQuery: []
     }
@@ -25,10 +25,11 @@ export class App extends react.Component {
 
     // methods bindings
     this.searchForEmployees = this.searchForEmployees.bind(this);
+    this.handleIsActiveChange = this.handleIsActiveChange.bind(this);
   }
   componentDidMount() {
     getAllEmployees().then(allEmployees => {
-      this.setState({employees: allEmployees})
+      this.setState({ employees: allEmployees })
       console.log("employees parsed")
     })
   }
@@ -36,21 +37,29 @@ export class App extends react.Component {
   searchForEmployees(query) {
     console.log(`search query: ${query}`)
     this.pickerElWrapper.current.className = addClassToString(this.pickerElWrapper.current.className, "hidden");
-    this.setState({searchQuery: query.split("")})
+    this.setState({ searchQuery: query.split("") })
   }
+
+  handleIsActiveChange(id, isActive) {
+    let activeEmployees = JSON.parse(JSON.stringify(this.state.activeEmployees));
+    activeEmployees[id] = isActive;
+    console.log(`active employees ${JSON.stringify(activeEmployees)}`)
+    this.setState({activeEmployees: activeEmployees});
+  }
+
   render() {
     const getEmployeesStartWithLetter = (letter) => {
       let employees = [...this.state.employees]
       employees = employees.filter(employee => {
         return employee.firstName.toLowerCase().startsWith(letter)
-      }).sort((a, b) => {
-        if(a.firstname < b.firstname) { return -1; }
-        if(a.firstname > b.firstname) { return 1; }
-        return 0;
+      }).sort(function (a, b) {
+        var textA = a.firstName.toUpperCase();
+        var textB = b.firstName.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
       })
-      console.log(`employees ${employees}`)
       return employees;
     }
+
     return (
       <div className="App">
         <div ref={this.pickerElWrapper}>
@@ -59,7 +68,12 @@ export class App extends react.Component {
         <div>
           {
             this.state.searchQuery.map((letter, i) => {
-              return <LetterSection key={i} letter={letter} employees={getEmployeesStartWithLetter(letter)} activeEmployees={this.state.activeEmployees}/>
+              return <LetterSection
+                letter={letter}
+                key={i}
+                employees={getEmployeesStartWithLetter(letter)}
+                activeEmployees={this.state.activeEmployees}
+                handleIsActiveChange={this.handleIsActiveChange} />
             })
           }
         </div>
@@ -82,7 +96,7 @@ export class App extends react.Component {
 //       })
 //     }
 //   )
-  
+
 //   const searchForEmployees = (query) => {
 //     console.log(`search query: ${query}`)
 //     pickerElWrapper.current.className = addClassToString(pickerElWrapper.current.className, "hidden");
