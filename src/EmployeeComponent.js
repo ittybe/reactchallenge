@@ -5,7 +5,7 @@ export function EmployeeComponent(props) {
     // id
     // firstName
     // lastName
-    
+
     const [isActive, setIsActive] = useState(props.isActive)
 
 
@@ -21,10 +21,12 @@ export function EmployeeComponent(props) {
     return (
         <div>
             <div>{props.firstName} {props.lastName}</div>
-            <div onChange={onIsActiveChange}>
-                <input defaultChecked={isActive === false} type="radio" value="notactive" name="IsActive" /> Not Active
-                <input defaultChecked={isActive === true} type="radio" value="active" name="IsActive" /> Active
-            </div>
+            <form>
+                <div onChange={onIsActiveChange}>
+                    <input defaultChecked={isActive === false} type="radio" value="notactive" name="IsActive" /> Not Active
+                    <input defaultChecked={isActive === true} type="radio" value="active" name="IsActive" /> Active
+                </div>
+            </form>
         </div>
     )
 }
