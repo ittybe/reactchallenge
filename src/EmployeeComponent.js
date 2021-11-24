@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./EmployeeComponent.css";
 
 export function EmployeeComponent(props) {
     // props
@@ -17,12 +18,18 @@ export function EmployeeComponent(props) {
     }
 
     return (
-        <div>
-            <div>{props.firstName} {props.lastName}</div>
-            <form>
+        <div className="employee">
+            <div className={`employee__fullname ${isActive ? "employee__fullname--active" : ""}`}>{props.firstName} {props.lastName}</div>
+            <form className="employee__form">
                 <div onChange={onIsActiveChange}>
-                    <input defaultChecked={isActive === false} type="radio" value="notactive" name="IsActive" /> Not Active
-                    <input defaultChecked={isActive === true} type="radio" value="active" name="IsActive" /> Active
+                    <label className="employee__input-container">Not Active
+                        <input className="employee__input" defaultChecked={isActive === false} type="radio" value="notactive" name="isActive" />
+                        <span className="employee__checkmark"></span>
+                    </label>
+                    <label className="employee__input-container">Active
+                        <input className="employee__input" defaultChecked={isActive === true} type="radio" value="active" name="isActive" />
+                        <span className="employee__checkmark"></span>
+                    </label>
                 </div>
             </form>
         </div>

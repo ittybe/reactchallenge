@@ -51,12 +51,12 @@ export function AlphabetPicker(props) {
             <div className="alphabet">
                 {
                     alphabetArray.map((letter, i) => {
-                        return (<button key={i} className={`alphabet__letter`} ref={(element) => letterRefs.current.push(element)} onClick={() => handleLetterClick(letter, i)} >{letter}</button>)
+                        return (<button key={i} className={`btn btn--alphabet-letter alphabet__letter`} ref={(element) => letterRefs.current.push(element)} onClick={() => handleLetterClick(letter, i)} >{letter}</button>)
                     })
                 }
             </div>
             <div>
-                <button onClick={() => props.searchForEmployees(pickedLetters)}>Search!</button>
+                <button className="btn btn--alphabet-picker" onClick={() => props.searchForEmployees(pickedLetters)}>Search!</button>
             </div>
         </div>
     )

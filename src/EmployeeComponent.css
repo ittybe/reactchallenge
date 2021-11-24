@@ -1,0 +1,64 @@
+.employee__fullname {
+    font-size: large;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+.employee__fullname--active {
+    color: blue;
+}
+/* CUSTOM RADIOBUTTON */
+.employee__input-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: normal;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.employee__input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.employee__checkmark {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border: solid black 1px;
+  border-radius: 50%;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.employee__checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.employee__input-container .employee__input:checked ~ .employee__checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.employee__input-container .employee__checkmark:after {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: black;
+}

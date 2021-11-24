@@ -162,13 +162,12 @@ export class App extends react.Component {
       return this.state.activeEmployees.length > 0  ? birthdates : <div>Employees List is empty</div>
     }
     return (
-      <div className="App">
-        <div>
-          <div ref={this.pickerElWrapper}>
+      <div className="app">
+        <div className="app__search">
+          <div className="alphabet-wrapper" ref={this.pickerElWrapper}>
             <AlphabetPicker searchForEmployees={this.searchForEmployees} pickedLetters={this.state.searchQuery.join("")}></AlphabetPicker>
-            <button onClick={this.displayEmployeeBirthdates}>check birthdates</button>
           </div>
-          <div>
+          <div className="lettersection-wrapper">
             {
               this.state.searchQuery.map((letter, i) => {
                 return <LetterSection
@@ -181,7 +180,7 @@ export class App extends react.Component {
             }
           </div>
         </div>
-        <div>
+        <div className="app__birthdates">
           {
             getBirthdatesElement()
           }

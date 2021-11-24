@@ -1,5 +1,6 @@
 import { useState } from "react";
 import EmployeeComponent from "./EmployeeComponent";
+import "./LetterSection.css";
 
 export function LetterSection(props) {
     // props
@@ -17,12 +18,12 @@ export function LetterSection(props) {
                 isActive={isActive} 
                 handleIsActiveChange={props.handleIsActiveChange}/>)
         })
-        return employees.length > 0 ? employees : "No Employees"
+        return employees.length > 0 ? employees : <div>No Employees</div>
     }
     return (
-        <div>
-            <div>{props.letter}</div>
-            <div>
+        <div className="lettersection">
+            <div className="lettersection__heading">{props.letter}</div>
+            <div className="lettersection__employees">
                 {
                     getEmployeesToDisplay()
                 }
