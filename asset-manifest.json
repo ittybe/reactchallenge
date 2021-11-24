@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/reactchallenge/static/css/main.6edd2594.chunk.css",
-    "main.js": "/reactchallenge/static/js/main.44476b42.chunk.js",
-    "main.js.map": "/reactchallenge/static/js/main.44476b42.chunk.js.map",
+    "main.js": "/reactchallenge/static/js/main.c19c11d3.chunk.js",
+    "main.js.map": "/reactchallenge/static/js/main.c19c11d3.chunk.js.map",
     "runtime-main.js": "/reactchallenge/static/js/runtime-main.ee99bb35.js",
     "runtime-main.js.map": "/reactchallenge/static/js/runtime-main.ee99bb35.js.map",
     "static/js/2.db3d4e8b.chunk.js": "/reactchallenge/static/js/2.db3d4e8b.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.ee99bb35.js",
     "static/js/2.db3d4e8b.chunk.js",
     "static/css/main.6edd2594.chunk.css",
-    "static/js/main.44476b42.chunk.js"
+    "static/js/main.c19c11d3.chunk.js"
   ]
 }
