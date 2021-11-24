@@ -9,18 +9,18 @@ export function DobMonth(props) {
             return <li className="month__employee" key={employee.id}>{employee.firstName} {employee.lastName} - {employee.dob}</li>
         })
 
-        return employees.length > 0 ? employees : <li className="month__employee">No employees</li> ;
+        return employees.length > 0 ? employees : <li className="month__employee">No employees</li>;
     }
     return (
         <div className="month">
             <div className="month__heading">{props.monthName}</div>
             <div>
                 <ul className="month__employees-list">
-                {
-                    getEmployeesToDisplay()
-                }
+                    {
+                        getEmployeesToDisplay()
+                    }
                 </ul>
-                
+
             </div>
         </div>
     )

@@ -1,27 +1,27 @@
 .alphabet-picker {
-    font-size: large;
-    max-width: 325px;
+  font-size: large;
+  max-width: 325px;
 }
 .alphabet-picker__query {
-    margin: 2px;
+  margin: 2px;
 }
 .btn {
-    background: none;
-    border: solid 1px black;
-    border-radius: 3px;
-    padding: 10px;
-    font-size: large;
-    font-weight: bold;
-    margin: 2px;
-    transition: background-color 0.2s;
+  background: none;
+  border: solid 1px black;
+  border-radius: 3px;
+  padding: 10px;
+  font-size: large;
+  font-weight: bold;
+  margin: 2px;
+  transition: background-color 0.2s;
 }
 .alphabet__letter--active {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 .btn:hover {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 .btn:focus {
-    outline: none;
-    background-color: darkgray;
+  outline: none;
+  background-color: darkgray;
 }

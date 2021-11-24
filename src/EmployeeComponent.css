@@ -1,10 +1,10 @@
 .employee__fullname {
-    font-size: large;
-    font-weight: bold;
-    margin: 20px 0px;
+  font-size: large;
+  font-weight: bold;
+  margin: 20px 0px;
 }
 .employee__fullname--active {
-    color: blue;
+  color: blue;
 }
 /* CUSTOM RADIOBUTTON */
 .employee__input-container {
@@ -48,17 +48,19 @@
 }
 
 /* Show the indicator (dot/circle) when checked */
-.employee__input-container .employee__input:checked ~ .employee__checkmark:after {
+.employee__input-container
+  .employee__input:checked
+  ~ .employee__checkmark:after {
   display: block;
 }
 
 /* Style the indicator (dot/circle) */
 .employee__input-container .employee__checkmark:after {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-	width: 15px;
-	height: 15px;
-	border-radius: 50%;
-	background: black;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: black;
 }

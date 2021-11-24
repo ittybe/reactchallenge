@@ -10,13 +10,13 @@ export function LetterSection(props) {
     const getEmployeesToDisplay = () => {
         let employees = props.employees.map((employee, i) => {
             const isActive = props.activeEmployees.indexOf(employee.id) !== -1 ? true : false;
-            return (<EmployeeComponent 
-                key={employee.id} 
-                id={employee.id} 
-                firstName={employee.firstName} 
-                lastName={employee.lastName} 
-                isActive={isActive} 
-                handleIsActiveChange={props.handleIsActiveChange}/>)
+            return (<EmployeeComponent
+                key={employee.id}
+                id={employee.id}
+                firstName={employee.firstName}
+                lastName={employee.lastName}
+                isActive={isActive}
+                handleIsActiveChange={props.handleIsActiveChange} />)
         })
         return employees.length > 0 ? employees : <div className="lettersection__noemployees">No Employees</div>
     }
@@ -29,7 +29,7 @@ export function LetterSection(props) {
                 }
             </div>
         </div>
-    ) 
+    )
 }
 
 export default LetterSection;

@@ -192,11 +192,11 @@ export class App extends react.Component {
               Employees Birthday
             </div>
             <div className="info-wrapper">
-            {
-              getBirthdatesElement()
-            }
+              {
+                getBirthdatesElement()
+              }
             </div>
-            
+
           </div>
         </div>
       </div>
