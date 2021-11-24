@@ -162,7 +162,7 @@ export class App extends react.Component {
       let birthdates = this.state.birthdates.map((month, i) => {
         return <DobMonth key={i} monthName={month.monthName} employees={month.employees} />
       })
-      return this.state.activeEmployees.length > 0 ? birthdates : <div>Employees List is empty</div>
+      return this.state.activeEmployees.length > 0 ? birthdates : <div className="months-wrapper__no-employees">Employees List is empty</div>
     }
     return (
       <div className="app">

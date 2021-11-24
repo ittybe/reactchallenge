@@ -1,0 +1,23 @@
+.month__heading {
+  font-size: x-large;
+  font-weight: bold;
+}
+.month__employees-list{
+    list-style: none;
+}
+.month__employee {
+  font-size: large;
+  position: relative;
+}
+.month__employee::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  transform: translate(0, -50%);
+}

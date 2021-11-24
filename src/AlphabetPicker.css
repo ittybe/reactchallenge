@@ -21,7 +21,7 @@
 .btn:hover {
     background-color: lightgray;
 }
-
 .btn:focus {
     outline: none;
+    background-color: darkgray;
 }

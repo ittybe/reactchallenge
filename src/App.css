@@ -2,7 +2,6 @@
   margin: 25px auto;
   max-width: 700px;
 }
-
 .employees {
   max-width: 800px;
 }
@@ -16,9 +15,12 @@
   /* justify-content: space-between; */
   margin-top: 50px;
 }
+.months-wrapper__no-employees {
+  font-size: large;
+  font-weight: bold;
+}
 .employees__heading,
 .birthdates__heading {
-  text-align: center;
   font-size: xx-large;
   font-weight: bold;
 }
@@ -26,6 +28,10 @@
 .months-wrapper,
 .lettersections-wrapper {
   margin-top: 40px;
+}
+
+.birthdates {
+  margin-top: 50px;
 }
 
 @media screen and (min-width: 1100px) {
@@ -38,6 +44,7 @@
     max-width: 1000px;
   }
   .birthdates {
+    margin-top: 0px;
     margin-left: auto;
     flex: 0 0 auto;
   }
