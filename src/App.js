@@ -174,7 +174,7 @@ export class App extends react.Component {
             <div className="employees__heading">
               Employees
             </div>
-            <div className="lettersections-wrapper">
+            <div className="info-wrapper info-wrapper--lettersection">
               {
                 this.state.searchQuery.map((letter, i) => {
                   return <LetterSection
@@ -191,7 +191,7 @@ export class App extends react.Component {
             <div className="birthdates__heading">
               Employees Birthday
             </div>
-            <div className="months-wrapper">
+            <div className="info-wrapper">
             {
               getBirthdatesElement()
             }

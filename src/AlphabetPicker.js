@@ -68,7 +68,7 @@ export function AlphabetPicker(props) {
                 }
             </div>
             <div>
-                <button className="btn btn--alphabet-picker" onClick={() => props.searchForEmployees(pickedLetters)}>Search!</button>
+                <button className="btn btn--alphabet-picker" onClick={() => props.searchForEmployees(pickedLetters)}>Search</button>
             </div>
         </div>
     )
