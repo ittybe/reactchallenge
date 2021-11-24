@@ -27,11 +27,9 @@ export class App extends react.Component {
     this.sessionStorageKey = "allData";
     // methods bindings
     this.searchForEmployees = this.searchForEmployees.bind(this);
-    this.handleIsActiveChange = this.handleIsActiveChange.bind(this);
     this.getEmployeesBirthdates = this.getEmployeesBirthdates.bind(this);
     this.displayEmployeeBirthdates = this.displayEmployeeBirthdates.bind(this);
-
-    
+    this.handleIsActiveChange = this.handleIsActiveChange.bind(this);
   }
 
   componentDidUpdate() {
@@ -61,8 +59,8 @@ export class App extends react.Component {
       data = JSON.parse(data);
       this.setState({
         activeEmployees: data.activeEmployees,
-        searchQuery : data.searchQuery,
-        birthdates : data.birthdates  
+        searchQuery: data.searchQuery,
+        birthdates: data.birthdates
       })
     }
   }
@@ -74,19 +72,23 @@ export class App extends react.Component {
   }
 
   handleIsActiveChange(id, isActive) {
-    let activeEmployees = [...this.state.activeEmployees];
+    let activeEmployeesLocal = [...this.state.activeEmployees];
     if (isActive) {
-      activeEmployees.push(id)
+      activeEmployeesLocal.push(id)
     }
     else {
-      let removeid = activeEmployees.indexOf(id)
-      activeEmployees.splice(removeid, 1)
+      let removeid = activeEmployeesLocal.indexOf(id)
+      activeEmployeesLocal.splice(removeid, 1)
     }
-    console.log(`active employees ${activeEmployees}`)
-    this.setState({ activeEmployees: activeEmployees });
-    this.displayEmployeeBirthdates();
+    console.log(`active employees ${activeEmployeesLocal}`)
+    this.setState({ activeEmployees: activeEmployeesLocal }, () => {
+      console.log(this.state.searchQuery);
+      this.displayEmployeeBirthdates();
+    });
   }
-
+  setActiveEmployees(employees) {
+    this.setState({ activeEmployees: employees });
+  }
   getEmployeesBirthdates() {
     // new Array(12).fill([]) do not create new instances of array, so if you add to one it will be added to all arrays
     const birthdates = [[], [], [], [], [], [], [], [], [], [], [], []]
@@ -104,6 +106,7 @@ export class App extends react.Component {
         // convert employee dob into string
         var options = { year: 'numeric', month: 'long', day: 'numeric' };
         console.log(date.toLocaleDateString("en-US", options))
+        employee.dob = date.toLocaleDateString("en-US", options)
         // add accordinly to the month array
         birthdates[monthIndex].push(employee);
       }
@@ -159,31 +162,42 @@ export class App extends react.Component {
       let birthdates = this.state.birthdates.map((month, i) => {
         return <DobMonth key={i} monthName={month.monthName} employees={month.employees} />
       })
-      return this.state.activeEmployees.length > 0  ? birthdates : <div>Employees List is empty</div>
+      return this.state.activeEmployees.length > 0 ? birthdates : <div>Employees List is empty</div>
     }
     return (
       <div className="app">
-        <div className="app__search">
-          <div className="alphabet-wrapper" ref={this.pickerElWrapper}>
-            <AlphabetPicker searchForEmployees={this.searchForEmployees} pickedLetters={this.state.searchQuery.join("")}></AlphabetPicker>
-          </div>
-          <div className="lettersections-wrapper">
-            {
-              this.state.searchQuery.map((letter, i) => {
-                return <LetterSection
-                  letter={letter.toUpperCase()}
-                  key={i}
-                  employees={getEmployeesStartWithLetter(letter)}
-                  activeEmployees={this.state.activeEmployees}
-                  handleIsActiveChange={this.handleIsActiveChange} />
-              })
-            }
-          </div>
+        <div className="alphabet-wrapper" ref={this.pickerElWrapper}>
+          <AlphabetPicker searchForEmployees={this.searchForEmployees} pickedLetters={this.state.searchQuery.join("")}></AlphabetPicker>
         </div>
-        <div className="app__birthdates">
-          {
-            getBirthdatesElement()
-          }
+        <div className="app__data-wrapper">
+          <div className="employees">
+            <div className="employees__heading">
+              Employees
+            </div>
+            <div className="lettersections-wrapper">
+              {
+                this.state.searchQuery.map((letter, i) => {
+                  return <LetterSection
+                    letter={letter.toUpperCase()}
+                    key={i}
+                    employees={getEmployeesStartWithLetter(letter)}
+                    activeEmployees={this.state.activeEmployees}
+                    handleIsActiveChange={this.handleIsActiveChange} />
+                })
+              }
+            </div>
+          </div>
+          <div className="birthdates">
+            <div className="birthdates__heading">
+              Employees Birthday
+            </div>
+            <div className="months-wrapper">
+            {
+              getBirthdatesElement()
+            }
+            </div>
+            
+          </div>
         </div>
       </div>
     );

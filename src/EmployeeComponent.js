@@ -23,11 +23,11 @@ export function EmployeeComponent(props) {
             <form className="employee__form">
                 <div onChange={onIsActiveChange}>
                     <label className="employee__input-container">Not Active
-                        <input className="employee__input" defaultChecked={isActive === false} type="radio" value="notactive" name="isActive" />
+                        <input className="employee__input" defaultChecked={isActive === false} type="radio" value="notactive" name="IsActive" />
                         <span className="employee__checkmark"></span>
                     </label>
                     <label className="employee__input-container">Active
-                        <input className="employee__input" defaultChecked={isActive === true} type="radio" value="active" name="isActive" />
+                        <input className="employee__input" defaultChecked={isActive === true} type="radio" value="active" name="IsActive" />
                         <span className="employee__checkmark"></span>
                     </label>
                 </div>

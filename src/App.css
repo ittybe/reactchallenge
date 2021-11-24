@@ -1,5 +1,23 @@
+.employees {
+    max-width: 800px;
+}
 .lettersections-wrapper {
     display: flex;
     flex-wrap: wrap;
-    
+}
+
+.employees__heading, .birthdates__heading {
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+}
+.app__data-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+.birthdates {
+    margin-left: 30px;
+}
+.months-wrapper, .lettersections-wrapper {
+    margin-top: 40px;
 }

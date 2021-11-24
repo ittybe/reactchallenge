@@ -34,12 +34,8 @@ export function AlphabetPicker(props) {
         let classNameStr = letterRef.className
         console.log(`classNameStr: ${classNameStr}, ${letter}, ${i}`)
         // check if active class exists
-        const activeClassName = "alphabet__letter--active";
 
-        if (/.*alphabet__letter--active.*/g.test(classNameStr)) {
-            // // if exists remove it  
-            // classNameStr = removeClassFromString(classNameStr, activeClassName);
-            // letterRef.className = classNameStr;
+        if (pickedLetters.indexOf(letter.toLowerCase()) !== -1) {
             // and remove it from picked letters
             let pickedLettersLocal = pickedLetters;
             pickedLettersLocal = pickedLettersLocal.replace(letter, '')
@@ -48,9 +44,6 @@ export function AlphabetPicker(props) {
             setPickedLetters(pickedLettersLocal)
         }
         else {
-            // // if not exists add it 
-            // classNameStr = addClassToString(classNameStr, activeClassName);
-            // letterRef.className = classNameStr;
             // and add it to pickedLetters
             let pickedLettersLocal = pickedLetters;
             pickedLettersLocal += letter;
