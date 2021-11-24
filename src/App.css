@@ -1,23 +1,44 @@
-.employees {
-    max-width: 800px;
-}
-.lettersections-wrapper {
-    display: flex;
-    flex-wrap: wrap;
+.app {
+  margin: 25px auto;
+  max-width: 700px;
 }
 
-.employees__heading, .birthdates__heading {
-    text-align: center;
-    font-size: xx-large;
-    font-weight: bold;
+.employees {
+  max-width: 800px;
+}
+.lettersections-wrapper {
+  display: flex;
+  flex-wrap: wrap;
 }
 .app__data-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  margin-top: 50px;
+}
+.employees__heading,
+.birthdates__heading {
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.months-wrapper,
+.lettersections-wrapper {
+  margin-top: 40px;
+}
+
+@media screen and (min-width: 1100px) {
+  .app__data-wrapper {
     display: flex;
     flex-direction: row;
-}
-.birthdates {
-    margin-left: 30px;
-}
-.months-wrapper, .lettersections-wrapper {
-    margin-top: 40px;
+  }
+  .app {
+    margin: 25px auto;
+    max-width: 1000px;
+  }
+  .birthdates {
+    margin-left: auto;
+    flex: 0 0 auto;
+  }
 }
