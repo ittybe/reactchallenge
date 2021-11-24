@@ -1,14 +1,17 @@
-import React, { useState, useRef, createRef } from 'react';
+import React, { useState, useRef, createRef, useEffect } from 'react';
 import onlyUnique from './utils/onlyUnique';
 import addClassToString from "./utils/addClassToString";
 import removeClassFromString from "./utils/removeClassFromString";
 
 export function AlphabetPicker(props) {
     const alphabetArray = "abcdefghijklmnopqrstuvwxyz".split("");
-
     // states
     const [pickedLetters, setPickedLetters] = useState("");
 
+    useEffect(()=> {
+        setPickedLetters(props.pickedLetters)
+    }, [props.pickedLetters])
+    
     const letterRefs = useRef(new Array());
     // fucntions
     const handleLetterClick = (letter, i) => {
@@ -18,6 +21,7 @@ export function AlphabetPicker(props) {
         console.log(`classNameStr: ${classNameStr}, ${letter}, ${i}`)
         // check if active class exists
         const activeClassName = "alphabet__letter--active";
+        
         if (/.*alphabet__letter--active.*/g.test(classNameStr)) {
             // if exists remove it  
             classNameStr = removeClassFromString(classNameStr, activeClassName);

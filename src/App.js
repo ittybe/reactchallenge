@@ -84,6 +84,7 @@ export class App extends react.Component {
     }
     console.log(`active employees ${activeEmployees}`)
     this.setState({ activeEmployees: activeEmployees });
+    this.displayEmployeeBirthdates();
   }
 
   getEmployeesBirthdates() {
@@ -154,12 +155,17 @@ export class App extends react.Component {
       })
       return employees;
     }
-
+    const getBirthdatesElement = () => {
+      let birthdates = this.state.birthdates.map((month, i) => {
+        return <DobMonth key={i} monthName={month.monthName} employees={month.employees} />
+      })
+      return this.state.activeEmployees.length > 0  ? birthdates : <div>Employees List is empty</div>
+    }
     return (
       <div className="App">
         <div>
           <div ref={this.pickerElWrapper}>
-            <AlphabetPicker searchForEmployees={this.searchForEmployees}></AlphabetPicker>
+            <AlphabetPicker searchForEmployees={this.searchForEmployees} pickedLetters={this.state.searchQuery.join("")}></AlphabetPicker>
             <button onClick={this.displayEmployeeBirthdates}>check birthdates</button>
           </div>
           <div>
@@ -177,9 +183,7 @@ export class App extends react.Component {
         </div>
         <div>
           {
-            this.state.birthdates.map((month, i) => {
-              return <DobMonth key={i} monthName={month.monthName} employees={month.employees} />
-            })
+            getBirthdatesElement()
           }
         </div>
       </div>
