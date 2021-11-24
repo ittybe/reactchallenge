@@ -1,0 +1,13 @@
+.lettersection__heading {
+    font-size: x-large;
+    font-weight: bolder;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+.lettersection__noemployees {
+    font-size: large;
+    font-weight: bold;
+}
+.lettersection {
+    margin: 10px;
+}

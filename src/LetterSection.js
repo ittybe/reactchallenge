@@ -18,7 +18,7 @@ export function LetterSection(props) {
                 isActive={isActive} 
                 handleIsActiveChange={props.handleIsActiveChange}/>)
         })
-        return employees.length > 0 ? employees : <div>No Employees</div>
+        return employees.length > 0 ? employees : <div className="lettersection__noemployees">No Employees</div>
     }
     return (
         <div className="lettersection">

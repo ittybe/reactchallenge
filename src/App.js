@@ -167,11 +167,11 @@ export class App extends react.Component {
           <div className="alphabet-wrapper" ref={this.pickerElWrapper}>
             <AlphabetPicker searchForEmployees={this.searchForEmployees} pickedLetters={this.state.searchQuery.join("")}></AlphabetPicker>
           </div>
-          <div className="lettersection-wrapper">
+          <div className="lettersections-wrapper">
             {
               this.state.searchQuery.map((letter, i) => {
                 return <LetterSection
-                  letter={letter}
+                  letter={letter.toUpperCase()}
                   key={i}
                   employees={getEmployeesStartWithLetter(letter)}
                   activeEmployees={this.state.activeEmployees}
